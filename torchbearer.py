@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Henry To
+Student ID:   132564767
 
 INSTRUCTIONS
 ------------
@@ -18,7 +18,6 @@ Submit this file as: torchbearer.py
 """
 
 import heapq
-
 
 # =============================================================================
 # PART 1
@@ -53,11 +52,13 @@ def select_sources(spawn, relics, exit_node):
     -------
     list[node]
         No duplicates. Order does not matter.
-
     TODO
     """
-    pass
-
+    source_list = [0] * (len(relics) + 1)
+    source_list[0] = spawn
+    for i in range(len(relics)):
+        source_list[i + 1] = relics[i]
+    return source_list
 
 def run_dijkstra(graph, source):
     """
@@ -72,11 +73,23 @@ def run_dijkstra(graph, source):
     dict[node, float]
         Minimum cost from source to every node in graph.
         Unreachable nodes map to float('inf').
-
-    TODO
     """
-    pass
-
+    pq = [(0, source)]
+    visited = set()
+    res = {}
+    while len(pq) is not 0:
+        curr = heapq.heappop(pq)
+        if curr[1] in visited:
+            continue
+        visited.add(curr[1])
+        res[curr[1]] = curr[0]
+        for nodes in graph[curr[1]]:
+            if nodes[0] not in visited:
+                heapq.heappush(pq, (curr[0] + nodes[1], nodes[0]))
+    for node in graph:
+        if node not in res:
+            res[node] = float('inf')
+    return res
 
 def precompute_distances(graph, spawn, relics, exit_node):
     """
@@ -92,11 +105,12 @@ def precompute_distances(graph, spawn, relics, exit_node):
     dict[node, dict[node, float]]
         Nested structure supporting dist_table[u][v] lookups
         for every source u your design requires.
-
-    TODO
     """
-    pass
-
+    res = {}
+    res[spawn] = run_dijkstra(graph, spawn)
+    for relic in relics:
+        res[relic] = run_dijkstra(graph, relic)
+    return res
 
 # =============================================================================
 # PART 3

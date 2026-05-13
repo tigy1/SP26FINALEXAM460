@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Henry To
+**Student ID:** 132564767
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,38 +17,32 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+  * A single shortest-path run is not enough, because the problem requires you to traverse through specific nodes, specified in M, that a shortest-path solution from S to the end T may not pass through. This relic node condition may necessitate a more unoptimal path solution before reaching the end.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  * We need to figure out in which order is most optimal to visit all the relic nodes that will result in a shortest cost path
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  * Because
 
 ---
 
 ## Part 2: Precomputation Design
 
 ### Part 2a: Source Selection
-
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Entrance (S) | This is the set starting point that you need to start all runs at. |
+| Relic (M[i]) | Each relic is a source because it serves as a checkpoint where you can calculate and compare the distance from it to other relics or the end. |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
-
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Dictionary |
+| What the keys represent | Each node in the dungeon/graph |
+| What the values represent | Shortest distance from entrace node to each key node |
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | O(1) because dictionary is a hashmap where each access with a Key is O(1) time complexity |
 
 ### Part 2c: Precomputation Complexity
 
