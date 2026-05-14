@@ -17,13 +17,14 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  * A single shortest-path run is not enough, because the problem requires you to traverse through specific nodes, specified in M, that a shortest-path solution from S to the end T may not pass through. This relic node condition may necessitate a more unoptimal path solution before reaching the end.
+  - A single shortest-path run is not enough, because the problem requires you to traverse through specific nodes, specified in M, that a shortest-path solution from S to the end T may not pass through. This relic node condition may necessitate a more unoptimal path solution before reaching the end.
 
 - **What decision remains after all inter-location costs are known:**
-  * We need to figure out in which order is most optimal to visit all the relic nodes that will result in a shortest cost path
+  - We need to figure out in which order is most optimal to visit all the relic nodes that will result in a shortest cost path
 
 - **Why this requires a search over orders (one sentence):**
-  * Because
+  - Because each different chosen order in picking relics produces different costs that seem unintuitive to pick out
+  - Therefore, we must search over the different orders in order to find the best one
 
 ---
 
@@ -48,7 +49,7 @@
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
+- **Number of Dijkstra runs:** Number of relics + 1
 - **Cost per run:** _your answer_
 - **Total complexity:** _your answer_
 - **Justification (one line):** _your answer_
@@ -95,21 +96,28 @@ _Your answer here._
 ## Part 4: Search Design
 
 ### Why Greedy Fails
-
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
-
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** 
+    - The greedy algorithm in this case is to choose the path to the next lowest cost relic available from one's current location
+- **Counter-example setup:**
+    - Start at S and assume there are two relics
+    - From S, let distance to R_1 be 1 and distance to R_2 be 2
+    - From R_1, let the distance to R_2 be 50 and R_1 to T be 1
+    - From R_2, let the distance to R_1 be 1 and R_2 to T be 1
+- **What greedy picks:**
+    - Greedy picks the route to R_1 because its the lowest immediate cost of 1 over cost of 2
+    - Then, it's forced to traverse from R_1 to R_2 with the cost of 50
+    - Finally, once it finishes the traversal to T, the final cost is 52
+- **What optimal picks:** 
+    - The optimal solution chooses to pick up relic R_2 first with a cost of 2
+    - Then it traverses to relic R_1 with a cost of 1
+    - Finally, it finishes the traversal to T with the final cost being 4
+- **Why greedy loses:** 
+    - The greedy solution fails because picking the local optimal doesn't guarantee a global optimal solution
+    - Early choices can affect how later choices play out and block one from optimal solutions
+    - With this framework, this is why a greedy algorithm isn't the best choice for this type of problem
 
 ### What the Algorithm Must Explore
-
-> One bullet. Must use the word "order."
-
-- _Your answer here._
+- The algorithm must explore all possible different combinations of orders in picking the relics so that the minimum cost path can be chosen
 
 ---
 
