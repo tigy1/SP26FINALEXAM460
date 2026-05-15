@@ -38,11 +38,11 @@
 
 ### Part 2c: Precomputation Complexity
 - **Number of Dijkstra runs:** 
-    - Number of relics (|M|) + 1
+  - Number of relics (|M|) + 1
 - **Cost per run:** 
-    - O((V+E)log V)
+  - O((V+E)log V)
 - **Total complexity:** 
-    - O((V+E)log V * (|M| + 1))
+  - O((V+E)log V * (|M| + 1))
 - **Justification (one line):** 
   - This is because we'll be running dijkstras algorithm for the entrance and all relic nodes to traverse from one to the other until the end
 
@@ -50,38 +50,27 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
-
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  - This means that the cost of the node in dist['v'] is the smallest distance cost from the start node 
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  - The cost of the nodes not yet finalized signifies the lowest cost or shortest path to that node from all nodes visited so far
 
 ### Part 3b: Why Each Phase Holds
-
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  - Before the iteration, there is no finalized nodes as no nodes have been seen yet except for the starting node
+  - Therefore, the starting node will be finalized and have cost 0 because that's where you're starting, and all other unfinalized nodes have cost infinity because there's no possible way to traverse to those nodes, which still qualifies as the shortest path from all nodes visited so far
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  - Finalizing the min-dist node is always correct, since because each node only adds non-negative weight, the cost of traversal is either only maintained or increasing
+  - Therefore, if that node is the minimum distance node currently seen, all other paths have equal or higher cost, meaning that no shorter path to that node could be found later 
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  - At termination, every node will be finalized, so the cost of every node signifies the shortest path distance to get to that node from the starting node
 
 ### Part 3c: Why This Matters for the Route Planner
-
-> One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+- Having correct distances ensures that the relics routed are truly minimized in their distances between eachother, and the opposite would lead to unoptimized nodal paths or a minimized cost route
 
 ---
 
@@ -89,24 +78,24 @@ _Your answer here._
 
 ### Why Greedy Fails
 - **The failure mode:** 
-    - The greedy algorithm in this case is to choose the path to the next lowest cost relic available from one's current location
+  - The greedy algorithm in this case is to choose the path to the next lowest cost relic available from one's current location
 - **Counter-example setup:**
-    - Start at S and assume there are two relics
-    - From S, let distance to R_1 be 1 and distance to R_2 be 2
-    - From R_1, let the distance to R_2 be 50 and R_1 to T be 1
-    - From R_2, let the distance to R_1 be 1 and R_2 to T be 1
+  - Start at S and assume there are two relics
+  - From S, let distance to R_1 be 1 and distance to R_2 be 2
+  - From R_1, let the distance to R_2 be 50 and R_1 to T be 1
+  - From R_2, let the distance to R_1 be 1 and R_2 to T be 1
 - **What greedy picks:**
-    - Greedy picks the route to R_1 because its the lowest immediate cost of 1 over cost of 2
-    - Then, it's forced to traverse from R_1 to R_2 with the cost of 50
-    - Finally, once it finishes the traversal to T, the final cost is 52
+  - Greedy picks the route to R_1 because its the lowest immediate cost of 1 over cost of 2
+  - Then, it's forced to traverse from R_1 to R_2 with the cost of 50
+  - Finally, once it finishes the traversal to T, the final cost is 52
 - **What optimal picks:** 
-    - The optimal solution chooses to pick up relic R_2 first with a cost of 2
-    - Then it traverses to relic R_1 with a cost of 1
-    - Finally, it finishes the traversal to T with the final cost being 4
+  - The optimal solution chooses to pick up relic R_2 first with a cost of 2
+  - Then it traverses to relic R_1 with a cost of 1
+  - Finally, it finishes the traversal to T with the final cost being 4
 - **Why greedy loses:** 
-    - The greedy solution fails because picking the local optimal doesn't guarantee a global optimal solution
-    - Early choices can affect how later choices play out and block one from optimal solutions
-    - With this framework, this is why a greedy algorithm isn't the best choice for this type of problem
+  - The greedy solution fails because picking the local optimal doesn't guarantee a global optimal solution
+  - Early choices can affect how later choices play out and block one from optimal solutions
+  - With this framework, this is why a greedy algorithm isn't the best choice for this type of problem
 
 ### What the Algorithm Must Explore
 - The algorithm must explore all possible different combinations of orders in picking the relics so that the minimum cost path can be chosen
@@ -133,9 +122,9 @@ _Your answer here._
 
 ### Part 5c: Worst-Case Search Space
 - **Worst-case number of orders considered:**
-    - O(k!)
+  - O(k!)
 - **Why:**
-    - The worst case is the case where you traverse through all combinations of relics, when each path gives a more optimal cost and nothing is pruned
+  - The worst case is the case where you traverse through all combinations of relics, when each path gives a more optimal cost and nothing is pruned
 
 ---
 
@@ -143,17 +132,19 @@ _Your answer here._
 
 ### Part 6a: Best-So-Far Tracking
 - **What is tracked:** 
-    - Cost of lowest cost route so far and traversal path of lowest cost route
+  - Cost of lowest cost route so far and traversal path of lowest cost route
 - **When it is used:** 
-    - It is used before the recursive loop to compare against the cost of the current path checked
+  - It is used before the recursive loop to compare against the cost of the current path checked
 - **What it allows the algorithm to skip:**
-    - Because of this, it allows the algorithm to skip exploring paths that already cost as much or more than the best solution found so far
+  - Because of this, it allows the algorithm to skip exploring paths that already cost as much or more than the best solution found so far
 
 ### Part 6b: Lower Bound Estimation
 - **What information is available at the current state:**
-    - The current location, the relics remaining to visit, and the current accumulated travel cost
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+  - The current location, the relics remaining to visit, and the current accumulated travel cost
+- **What the lower bound accounts for:** 
+  - The current cost of the partial path being traversed
+- **Why it never overestimates:**
+  - Because traveling to other nodes only adds cost, the current cost can only be maintained or increased, meaning that the optimal path can never be pruned or fail to be achieved
 
 ### Part 6c: Pruning Correctness
 - Pruning is safe because all distances are nonnegative, so continuing along a path can only increase or maintain the current cost

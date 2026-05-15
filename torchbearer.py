@@ -123,9 +123,15 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
     """
-    return "TODO"
+    return ("For nodes already finalized (in S): This means that the cost of the node in dist['v'] is the smallest distance cost from the start node"
+            "\nFor nodes not yet finalized (not in S): The cost of the nodes not yet finalized signifies the lowest cost or shortest path to that node from all nodes visited so far"
+            "\nInitialization : why the invariant holds before iteration 1: Before the iteration, there is no finalized nodes as no nodes have been seen yet except for the starting node"
+            "\nTherefore, the starting node will be finalized and have cost 0 because that's where you're starting, and all other unfinalized nodes have cost infinity because there's no possible way to traverse to those nodes, which still qualifies as the shortest path from all nodes visited so far"
+            "\nMaintenance : why finalizing the min-dist node is always correct: Finalizing the min-dist node is always correct, since because each node only adds non-negative weight, the cost of traversal is either only maintained or increasing"
+            "\nTherefore, if that node is the minimum distance node currently seen, all other paths have equal or higher cost, meaning that no shorter path to that node could be found later"
+            "\nTermination : what the invariant guarantees when the algorithm ends: At termination, every node will be finalized, so the cost of every node signifies the shortest path distance to get to that node from the starting node"
+            "\nWhy This Matters for the Route Planner: Having correct distances ensures that the relics routed are truly minimized in their distances between eachother, and the opposite would lead to unoptimized nodal paths or a minimized cost route")
 
 
 # =============================================================================
