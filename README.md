@@ -4,18 +4,9 @@
 **Student ID:** 132564767
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
-
 - **Why a single shortest-path run from S is not enough:**
   - A single shortest-path run is not enough, because the problem requires you to traverse through specific nodes, specified in M, that a shortest-path solution from S to the end T may not pass through. This relic node condition may necessitate a more unoptimal path solution before reaching the end.
 
@@ -46,15 +37,12 @@
 | Why O(1) lookup is possible | O(1) because dictionary is a hashmap where each access with a Key is O(1) time complexity |
 
 ### Part 2c: Precomputation Complexity
-
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** 
-    - Number of relics + 1
+    - Number of relics (|M|) + 1
 - **Cost per run:** 
     - O((V+E)log V)
 - **Total complexity:** 
-    - O((V+E)log V) * (|R| + 1)
+    - O((V+E)log V * (|M| + 1))
 - **Justification (one line):** 
   - This is because we'll be running dijkstras algorithm for the entrance and all relic nodes to traverse from one to the other until the end
 
@@ -128,65 +116,50 @@ _Your answer here._
 ## Part 5: State and Search Space
 
 ### Part 5a: State Representation
-
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | current_loc | node | The current node along any path that you're on, including any relics or the entrance |
+| Relics already collected | relics_visited_order | list | The local list of relics storing the nodes that you've visited along the path currently traversing |
+| Fuel cost so far | cost_so_far | int | the cost it takes to get to current node |
 
 ### Part 5b: Data Structure for Visited Relics
-
-> Fill in the table.
-
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | This structure fits because there's only a unique number of relics, so every time you visit, you can remove it from the set, allowing for marking/unmarking cleanly |
 
 ### Part 5c: Worst-Case Search Space
-
-> Two bullets.
-
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:**
+    - O(k!)
+- **Why:**
+    - The worst case is the case where you traverse through all combinations of relics, when each path gives a more optimal cost and nothing is pruned
 
 ---
 
 ## Part 6: Pruning
 
 ### Part 6a: Best-So-Far Tracking
-
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** 
+    - Cost of lowest cost route so far and traversal path of lowest cost route
+- **When it is used:** 
+    - It is used before the recursive loop to compare against the cost of the current path checked
+- **What it allows the algorithm to skip:**
+    - Because of this, it allows the algorithm to skip exploring paths that already cost as much or more than the best solution found so far
 
 ### Part 6b: Lower Bound Estimation
-
-> Three bullets.
-
-- **What information is available at the current state:** _Your answer here._
+- **What information is available at the current state:**
+    - The current location, the relics remaining to visit, and the current accumulated travel cost
 - **What the lower bound accounts for:** _Your answer here._
 - **Why it never overestimates:** _Your answer here._
 
 ### Part 6c: Pruning Correctness
-
-> One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
+- Pruning is safe because all distances are nonnegative, so continuing along a path can only increase or maintain the current cost
+- If a partial route already costs as much or more than the best complete route found so far, it can't possibly lead to a more optimal solution
 
 ---
 
 ## References
-
-> Bullet list. If none beyond lecture notes, write that.
-
-- _Your references here._
+- Lecture notes

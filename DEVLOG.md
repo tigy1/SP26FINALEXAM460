@@ -10,31 +10,20 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
-
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
-
-_Your entry here._
+## Entry 1 – [5/9/2026]: Initial Plan
+I plan to do much of the README first to establish a solid theory understanding of the problem at hand. The two parts that I expect to be the hardest are implementing the functions for dikjstras and using backtracking & recursion to traverse the labrynth to achieve an optimal answer.
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/14/2026]: [Implementing _explore Problems]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
-
+A wrong assumption that I initially had when writing the helper method "_explore" was that the variable "cost_so_far" would be used to display the best cost path, 
 ---
 
-## Entry 3 – [Date]: [Short description]
-
-_Your entry here._
-
----
-
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 3 – [5/14/2026]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
@@ -43,18 +32,15 @@ _Your entry here._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
-
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
-
+## Final Entry – [5/14/2026]: Time Estimate
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
-| **Total** | |
+| Part 1: Problem Analysis | 1 |
+| Part 2: Precomputation Design | .75 |
+| Part 3: Algorithm Correctness | 1 |
+| Part 4: Search Design | 1 |
+| Part 5: State and Search Space | .5 |
+| Part 6: Pruning | .5 |
+| Part 7: Implementation | 3 |
+| README and DEVLOG writing | 1 |
+| **Total** | 8.75 |

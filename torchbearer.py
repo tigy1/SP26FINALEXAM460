@@ -196,7 +196,6 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     None
         Updates best in place.
     
-    TODO
     Implement: base case, pruning, recursive case, backtracking.
 
     REQUIRED: Add a 1-2 sentence comment near your pruning condition
@@ -209,6 +208,10 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
             best[1] = relics_visited_order.copy()
             best[0] = cost_so_far
         return
+    # The pruning condition is below
+    # This cannot skip the optimal solution, because if the current path costs the same or more to traverse than
+    # the best path seen so far, and traversing only adds cost, then there's no universe where the current
+    # path can be better than the optimal path
     if cost_so_far >= best[0]:
         return
     for relic in list(relics_remaining):
