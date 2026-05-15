@@ -49,10 +49,14 @@
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** Number of relics + 1
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** 
+    - Number of relics + 1
+- **Cost per run:** 
+    - O((V+E)log V)
+- **Total complexity:** 
+    - O((V+E)log V) * (|R| + 1)
+- **Justification (one line):** 
+  - This is because we'll be running dijkstras algorithm for the entrance and all relic nodes to traverse from one to the other until the end
 
 ---
 
