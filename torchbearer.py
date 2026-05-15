@@ -31,10 +31,10 @@ def explain_problem():
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
 
-    TODO
     """
-    return "TODO"
-
+    return ("Why a single shortest-path run from S is not enough: A single shortest-path run is not enough, because the problem requires you to traverse through specific nodes, specified in M, that a shortest-path solution from S to the end T may not pass through"
+            "\nWhat decision remains after all inter-location costs are known: We need to figure out in which order is most optimal to visit all the relic nodes that will result in a shortest cost path"
+            "\nWhy this requires a search over orders: Because each different chosen order in picking relics produces different costs that seem unintuitive to pick out. Therefore, we must search over the different orders in order to find the best one")
 
 # =============================================================================
 # PART 2
@@ -52,7 +52,6 @@ def select_sources(spawn, relics, exit_node):
     -------
     list[node]
         No duplicates. Order does not matter.
-    TODO
     """
     source_list = [0] * (len(relics) + 1)
     source_list[0] = spawn
@@ -141,9 +140,13 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
     """
-    return "TODO"
+    return ("The failure mode: The greedy algorithm in this case is to choose the path to the next lowest cost relic available from one's current location."
+            "\nCounter-example setup: Start at S and assume there are two relics. From S, let distance to R_1 be 1 and distance to R_2 be 2. From R_1, let the distance to R_2 be 50 and R_1 to T be 1. From R_2, let the distance to R_1 be 1 and R_2 to T be 1."
+            "\nWhat greedy picks: Greedy picks the route to R_1 because its the lowest immediate cost of 1 over cost of 2. Then, it's forced to traverse from R_1 to R_2 with the cost of 50. Finally, once it finishes the traversal to T, the final cost is 52."
+            "\nWhat optimal picks: The optimal solution chooses to pick up relic R_2 first with a cost of 2. Then it traverses to relic R_1 with a cost of 1. Finally, it finishes the traversal to T with the final cost being 4."
+            "\nWhy greedy loses: The greedy solution fails because picking the local optimal doesn't guarantee a global optimal solution. Early choices can affect how later choices play out and block one from optimal solutions. With this framework, this is why a greedy algorithm isn't the best choice for this type of problem."
+            "\nWhat the Algorithm Must Explore: The algorithm must explore all possible different combinations of orders in picking the relics so that the minimum cost path can be chosen")
 
 
 # =============================================================================
@@ -168,7 +171,6 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """ 
     best = [float('inf'), []]
     _explore(dist_table, spawn, set(relics), [], 0, exit_node, best)

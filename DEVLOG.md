@@ -3,11 +3,6 @@
 **Student Name:** Henry To
 **Student ID:** 132564767
 
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – [5/9/2026]: Initial Plan
@@ -15,20 +10,13 @@ I plan to do much of the README first to establish a solid theory understanding 
 
 ---
 
-## Entry 2 – [5/14/2026]: [Implementing _explore Problems]
+## Entry 2 – [5/14/2026]: Implementing "_explore" Problems
+A wrong assumption that I initially had when writing the helper method "_explore" was that the variable "cost_so_far" would be used to display the best cost path, and that I was only calculating the current path's cost once all relics were traversed in order to compare with the cheapest cost so far. This came with a few problems: first, I couldn't treat an immutable variable as a global updatable variable, and updating "cost_so_far" wouldn't allow other stack frames to use this data to compare to the current path's cost. Also, calculating the path's cost at the end blocked optimizing the algorithm with pruning, as I couldn't check the cost of the path along the way. I resolved this issue by treating "cost_so_far" as a current cost variable and also storing the best cost within the "best" list in its first index, and stored the best path as an embedded list in the list's second index, allowing for global updates and live-time local path cost tracking.
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
-
-A wrong assumption that I initially had when writing the helper method "_explore" was that the variable "cost_so_far" would be used to display the best cost path, 
 ---
 
 ## Entry 3 – [5/14/2026]: Post-Implementation Reflection
-
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+I think there could be a much better solution to mine in finding the optimal path, in which O(k!) worst case is not achieved. Given more time, I would try to improve the search using dynamic programming or memoization so repeated subproblems are not recomputed, because there could potentially be a way to prevent reuse of the same subpaths.
 
 ---
 
